@@ -2,7 +2,10 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { ApiError } from "./utils/ApiErr.js";
+import path from "path";
 const app = express();
+const __dirname = path.resolve();
+dotenv.config();
 
 app.use(
   cors({
@@ -16,6 +19,15 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 import bfhlRoute from "./routes/bfhl.routes.js";
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
+
 app.use("/bfhl", bfhlRoute);
 
 app.use((err, req, res, next) => {

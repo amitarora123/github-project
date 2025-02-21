@@ -15,7 +15,7 @@ function App() {
       }
 
       const parsedData = JSON.parse(jsonInput);
-      const res = await axios.post("http://localhost:4000/bfhl", parsedData, {
+      const res = await axios.post("/bfhl", parsedData, {
         headers: { "Content-Type": "application/json" },
       });
 
