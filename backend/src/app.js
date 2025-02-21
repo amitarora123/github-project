@@ -3,6 +3,12 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { ApiError } from "./utils/ApiErr.js";
 import path from "path";
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: "./env",
+});
+
 const app = express();
 const __dirname = path.resolve();
 dotenv.config();
